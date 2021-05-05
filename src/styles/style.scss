@@ -1,0 +1,192 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #fff0e1;
+    position: relative;
+}
+
+.form-container {
+    width: 322px;
+    height: 130px;
+    background-color: #b1c9ff;
+    position: absolute;
+    top: 295px;
+    left: 138px;
+
+    select {
+        width: 263px;
+        height: 34px;
+        position: absolute;
+        top: 56px;
+        left: 29px;
+        /*    &::placeholder{
+        padding-left: 12px;
+        color: #c3c3c3;
+      } */
+    }
+
+    h2 {
+        position: absolute;
+        margin-top: 38px;
+        left: 29px;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+}
+
+.rectangle {
+    width: 28.28px;
+    height: 28.28px;
+    transform: rotate(45deg);
+    position: absolute;
+    z-index: 1;
+}
+.rectangle.blue {
+    background: #b1c9ff;
+    top: 410.86px;
+    left: 284.86px;
+}
+.rectangle.green {
+    background: #cae99a;
+    top: 495.86px;
+    left: 445.86px;
+}
+
+.new-city-container {
+    width: 322px;
+    height: 170px;
+    position: absolute;
+    top: 425px;
+    left: 138px;
+    background-color: #cae99a;
+
+    h2 {
+        position: absolute;
+        top: 28px;
+        left: 29px;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+    input {
+        height: 34px;
+        width: 263px;
+        position: absolute;
+        top: 50px;
+        left: 29px;
+    }
+    button {
+        width: 263px;
+        height: 34px;
+        background-color: #80ba27;
+        position: absolute;
+        top: 99px;
+        left: 29px;
+        color: white;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+    }
+}
+
+.cities-container {
+    width: 652px;
+    height: 771px;
+    position: absolute;
+    background-color: white;
+    left: 460px;
+    top: 119px;
+
+    .cities__top {
+        background-color: #dbe6ff;
+        height: 70px;
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        display: flex;
+
+        .cities__top-title,
+        .cities__top-county {
+            font-size: 18px;
+            position: absolute;
+            top: 31px;
+        }
+        .cities__top-title {
+            left: 110px;
+            text-transform: uppercase;
+            color: #4a82ff;
+        }
+        .cities__top-county {
+            left: 196px;
+            color: #6897ff;
+        }
+    }
+
+    .cities__content {
+       
+        .cities__content-title {
+            position: absolute;
+            top: 100px;
+            left: 88px;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #80ba27;
+        }
+        .cities__content-list {
+            position: absolute;
+            top: 108px;
+            left: 195px;
+            list-style: none;
+            line-height: 33px;
+            font-size: 14px;
+            font-weight: 500;
+            overflow-y: scroll;
+            height: 80%;
+            &::-webkit-scrollbar {
+               visibility: visible;
+            }
+            li {
+                cursor: pointer;
+            }
+        }
+        .cities__content-list li.hide {
+            display: none;
+        }
+        .selected-wrapper {
+            .selected-item {
+                width: 275px;
+                height: 34px;
+                padding-left: 13px;
+                position: relative;
+                line-height: 33px;
+            }
+            .button {
+                width: 34px;
+                height: 34px;
+                margin-right: 7px;
+                border-radius: 5px;
+                border: 1px solid;
+                color: #ffffff;
+                cursor: pointer;
+            }
+            .button.delete {
+                background-color: #e85128;
+                border-color: #e85128;
+                margin-left: 12px;
+            }
+            .button.modify {
+                background-color: #80ba27;
+                border-color: #80ba27;
+            }
+            .button.cancel {
+                background-color: #9b9b9b;
+                border-color: #9b9b9b;
+            }
+        }
+        .selected-wrapper.hide {
+            display: none;
+        }
+    }
+}
