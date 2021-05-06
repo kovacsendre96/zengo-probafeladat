@@ -110,7 +110,6 @@ export function editCityApi(cityId, cityModify, setState, cities, index) {
 
             if (response.data.data !== "") {
                 setState([...cities, cities[index].name = response.data.data.name]);
-
             }
 
             if (response.data.errorMessage) {

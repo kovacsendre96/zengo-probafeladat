@@ -7,36 +7,35 @@
 body {
     background-color: #fff0e1;
     position: relative;
-  
 }
-header{
+header {
     width: 100%;
     height: 60px;
     background: #ffffff;
-    position: relative;    
-    .logo{
+    position: relative;
+    .logo {
         position: absolute;
         left: 137px;
         top: 13px;
     }
 }
-.triangle-container{
+.triangle-container {
     width: 322px;
     height: 175.89px;
-    background:url(../img/pattern.jpg);
+    background: url(../img/pattern.jpg);
     position: absolute;
     top: 119px;
     left: 138px;
     opacity: 30%;
 }
-.triangle-container.bottom{
+.triangle-container.bottom {
     top: 425px;
-    transform: rotateX(180deg)
+    transform: rotateX(180deg);
 }
-.triangle-container.bottom.active{
-    top: 595px; ;
+.triangle-container.bottom.active {
+    top: 595px;
 }
-.illustration-wrapper{
+.illustration-wrapper {
     width: 299px;
     height: 205px;
     position: absolute;
@@ -44,7 +43,7 @@ header{
     top: 295.29px;
     background: url(../img/illustration.jpg);
 }
-.illustration-wrapper.hide{
+.illustration-wrapper.hide {
     display: none;
 }
 
@@ -62,7 +61,6 @@ header{
         position: absolute;
         top: 56px;
         left: 29px;
-      
     }
 
     h2 {
@@ -72,7 +70,6 @@ header{
         font-size: 13px;
         text-transform: uppercase;
     }
-    
 }
 
 .rectangle {
@@ -163,7 +160,6 @@ header{
     }
 
     .cities__content {
-       
         .cities__content-title {
             position: absolute;
             top: 100px;
@@ -183,7 +179,7 @@ header{
             overflow-y: scroll;
             height: 80%;
             &::-webkit-scrollbar {
-               visibility: visible;
+                visibility: visible;
             }
             li {
                 cursor: pointer;

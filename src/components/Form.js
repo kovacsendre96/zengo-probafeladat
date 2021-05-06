@@ -62,9 +62,6 @@ import { getCitiesApi, newCityApi, editCityApi, deleteCityApi } from './axiosHel
 const Form = ({ selectInput, cities, setCities, }) => {
 
 
-
-
-
     ///////////////////////// States /////////////////////////
 
 
