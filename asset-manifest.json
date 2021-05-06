@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/zengo-probafeladat/static/css/main.39a49182.chunk.css",
+    "main.css": "/zengo-probafeladat/static/css/main.ac4ae770.chunk.css",
     "main.js": "/zengo-probafeladat/static/js/main.5d042fc7.chunk.js",
     "main.js.map": "/zengo-probafeladat/static/js/main.5d042fc7.chunk.js.map",
     "runtime-main.js": "/zengo-probafeladat/static/js/runtime-main.6e7bbd51.js",
@@ -8,14 +8,14 @@
     "static/js/2.f0a2f7fe.chunk.js": "/zengo-probafeladat/static/js/2.f0a2f7fe.chunk.js",
     "static/js/2.f0a2f7fe.chunk.js.map": "/zengo-probafeladat/static/js/2.f0a2f7fe.chunk.js.map",
     "index.html": "/zengo-probafeladat/index.html",
-    "static/css/main.39a49182.chunk.css.map": "/zengo-probafeladat/static/css/main.39a49182.chunk.css.map",
+    "static/css/main.ac4ae770.chunk.css.map": "/zengo-probafeladat/static/css/main.ac4ae770.chunk.css.map",
     "static/js/2.f0a2f7fe.chunk.js.LICENSE.txt": "/zengo-probafeladat/static/js/2.f0a2f7fe.chunk.js.LICENSE.txt",
     "static/media/style.scss": "/zengo-probafeladat/static/media/pattern.76c52582.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.6e7bbd51.js",
     "static/js/2.f0a2f7fe.chunk.js",
-    "static/css/main.39a49182.chunk.css",
+    "static/css/main.ac4ae770.chunk.css",
     "static/js/main.5d042fc7.chunk.js"
   ]
 }
