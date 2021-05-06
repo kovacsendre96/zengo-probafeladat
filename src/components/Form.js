@@ -81,10 +81,7 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
 
     const li = document.querySelectorAll('li');
-    const modifyInput = document.querySelectorAll('.selected-item');
-
-
-
+ 
 
 
 
