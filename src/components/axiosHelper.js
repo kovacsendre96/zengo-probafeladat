@@ -8,8 +8,8 @@ They are separated from the other codes for easier transparency.
 
 Roles of functions:
                         -[1] Getting cities from API
-                        -[2] Creating a new city
-                        -[3] Edit city name
+                        -[2] Creating a new city +error alert
+                        -[3] Edit city name  +error alert
                         -[4] Delete city
 
 
@@ -30,8 +30,10 @@ export function getCitiesApi(stateId, setState) {
             }
         })
         .then(response => {
+
+
             setState(response.data.data);
-            console.log(response)
+
 
         })
         .catch((err) => console.log(err));
@@ -51,7 +53,7 @@ method:put
 params: -name: name of the new city
         -state_id : count id 
 */
-export function newCityApi(newCityName, stateId) {
+export function newCityApi(newCityName, stateId, setState, cities) {
     axios.put('http://probafeladat-api.zengo.eu/api/city',
         {
             name: newCityName,
@@ -64,8 +66,14 @@ export function newCityApi(newCityName, stateId) {
             }
         })
         .then(response => {
+            setState([...cities, response.data.data]);
 
-            console.log(response.data)
+
+
+            if (response.data.errorMessage) {               
+                alert(response.data.errorMessage.name[0])
+            }
+
 
 
 
@@ -86,7 +94,7 @@ method:patch
 params: -name: name of the new city
         -city_id : city id 
 */
-export function editCityApi(cityId, cityModify) {
+export function editCityApi(cityId, cityModify, setState, cities, index) {
     axios.patch('http://probafeladat-api.zengo.eu/api/city',
         {
             city_id: cityId,
@@ -100,8 +108,14 @@ export function editCityApi(cityId, cityModify) {
         })
         .then(response => {
 
-            console.log(response)
+            if (response.data.data !== "") {
+                setState([...cities, cities[index].name = response.data.data.name]);
 
+            }
+
+            if (response.data.errorMessage) {
+                alert(response.data.errorMessage.name[0])
+            }
 
         })
         .catch((err) => console.log(err));
@@ -117,7 +131,7 @@ export function editCityApi(cityId, cityModify) {
 method:delete
 params: -city_id : city id 
 */
-export function deleteCityApi(cityId,) {
+export function deleteCityApi(cityId) {
     axios.delete('http://probafeladat-api.zengo.eu/api/city',
         {
             data:
