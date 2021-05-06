@@ -131,7 +131,7 @@ export function editCityApi(cityId, cityModify, setState, cities, index) {
 method:delete
 params: -city_id : city id 
 */
-export function deleteCityApi(cityId) {
+export function deleteCityApi(cityId,stateId,setState) {
     axios.delete('http://probafeladat-api.zengo.eu/api/city',
         {
             data:
@@ -140,8 +140,7 @@ export function deleteCityApi(cityId) {
         }
     ).then(response => {
 
-        console.log(response.data)
-
+        getCitiesApi(stateId, setState)
 
     })
         .catch((err) => console.log(err));

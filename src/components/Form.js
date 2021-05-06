@@ -47,7 +47,7 @@ import { getCitiesApi, newCityApi, editCityApi, deleteCityApi } from './axiosHel
                                                     szükséges hozzá:    - [5.1] Mivel már minden elő van készítve , csakegy onClick kezelőre van szükség
                                                                          -[5.2] meghívom az axiosHelper.js nevű file-ból a függvényt amivel a kattintot várost
                                                                                 kitörlöm az API-ból, és átadom neki a szükséges paramétereket.
-                                                                         -[5.3] Újra lekérem a városoakt
+                                                                     
                                                                     
                                                                         
                                                                         
@@ -77,7 +77,7 @@ const Form = ({ selectInput, cities, setCities, }) => {
     const [cityId, setCityId] = useState(); //[3.1]
 
 
-    const [changeCityName, setChangeCityName] = useState();  //[4.1]
+    const [changeCityInputValue, setChangeCityInputValue] = useState();  //[4.1]
 
 
     const li = document.querySelectorAll('li');
@@ -94,14 +94,18 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
     const selectValueHandler = (e) => {         //[1.2]
 
-    
+
         count = selectInput.filter(f => f.name === e.target.value);
         setCountyId(count[0].id);
         getCitiesApi(count[0].id, setCities);  //[1.3]
-        
+        const li = document.querySelectorAll('li');
+        for (let i = 0; i < li.length; i++) {
+            li[i].className = ""
+            li[i].nextElementSibling.className = "selected-wrapper hide"
 
+        };
     };
-    console.log(countyId)
+
 
 
     const onChangeNewCityHandler = (e) => {    //[2.2]
@@ -121,42 +125,42 @@ const Form = ({ selectInput, cities, setCities, }) => {
     const clickedCityHandler = (e) => {            //[3.1]
 
         const li = document.querySelectorAll('li');
-        for(let i =0;i<li.length;i++){
-            li[i].className=""
-            li[i].nextElementSibling.className="selected-wrapper hide"
-        }    
-       
-   
-       
-        
+        for (let i = 0; i < li.length; i++) {
+            li[i].className = ""
+            li[i].nextElementSibling.className = "selected-wrapper hide"
+        }
+
+
+
+
+        setChangeCityInputValue(cities.filter(f => f.name === e.target.innerText)[0].name);
+
         setCityId(cities.filter(f => f.name === e.target.innerText)[0].id); //[3.4]
         e.target.nextSibling.className = "selected-wrapper";
         e.target.className = "hide";                            //[3.5]
-        
 
     }
 
     const closeButton = () => {                     //[3.6]
-       for (let i = 0; i < li.length; i++) {
-            li[i].className=""
-            li[i].nextElementSibling.className="selected-wrapper hide"
-            modifyInput[i].value = li[i].innerText;
-        }; 
-       
+        for (let i = 0; i < li.length; i++) {
+            li[i].className = ""
+            li[i].nextElementSibling.className = "selected-wrapper hide"
+            setChangeCityInputValue(li[i].innerText);
+        };
 
     };
 
 
 
     const onChangeCityNameHandler = (e) => {        //[4.2]
-        setChangeCityName(e.target.value);
+        setChangeCityInputValue(e.target.value);
     };
 
     const acceptButton = () => {        //[4.3]
 
         const index = cities.findIndex(i => i.id === cityId); // [4.4]
-       
-        editCityApi(cityId, changeCityName, setCities, cities, index);    //[4.5]
+
+        editCityApi(cityId, changeCityInputValue, setCities, cities, index);    //[4.5]
 
         for (let i = 0; i < li.length; i++) {
             li[i].className = "";                                   //[4.6]
@@ -168,32 +172,31 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
 
     const removeButton = () => {            //[5.1]
-        deleteCityApi(cityId);              //[5.2]
-        getCitiesApi(countyId,setCities);          //[5.3]
-       
+        deleteCityApi(cityId,countyId,setCities);              //[5.2]
+        
         for (let i = 0; i < li.length; i++) {
             li[i].className = "";
             li[i].nextSibling.className = "selected-wrapper hide";
-          
         };
+       
     };
 
-  
 
-  ///////////////////////// Render /////////////////////////
+
+    ///////////////////////// Render /////////////////////////
 
     return (
         selectInput !== undefined &&
         <>
-     
+
             <div className='form-container'>
                 <h2>Megye</h2>
                 <select onChange={selectValueHandler}>
-                <option className="default-option" selected disabled hidden>Válassz megyét!</option>
+                    <option className="default-option" selected disabled hidden>Válassz megyét!</option>
                     {selectInput.map(county => <option key={county.id} value={county.name}>{county.name}</option>)}
                 </select>
             </div>
-           
+
             {
                 cities !== null &&
                 <>
@@ -209,7 +212,7 @@ const Form = ({ selectInput, cities, setCities, }) => {
                     <div className="cities-container">
                         <div className="cities__top">
                             <h6 className="cities__top-title">Megye</h6>
-                            <h6 className="cities__top-county">{selectInput.filter(f=>f.id===countyId)[0].name}</h6>
+                            <h6 className="cities__top-county">{selectInput.filter(f => f.id === countyId)[0].name}</h6>
                         </div>
                         <div className="cities__content">
                             <h6 className="cities__content-title">Városok</h6>
@@ -217,8 +220,9 @@ const Form = ({ selectInput, cities, setCities, }) => {
                                 {
                                     cities.map(city => <>
                                         <li key={city.id} onClick={clickedCityHandler}> {city.name}</li>
-                                        <div className="selected-wrapper hide ">
-                                            <input onChange={onChangeCityNameHandler} defaultValue={city.name} className="selected-item" ></input>
+
+                                        <div className="selected-wrapper hide">
+                                            <input onChange={onChangeCityNameHandler} value={changeCityInputValue} className="selected-item" ></input>
                                             <button onClick={acceptButton} className="button modify"><FontAwesomeIcon icon={faCheck} /></button>
                                             <button onClick={closeButton} className="button cancel"><FontAwesomeIcon icon={faTimes} /></button>
                                             <button onClick={removeButton} className="button delete"><FontAwesomeIcon icon={faTrashAlt} /></button>
