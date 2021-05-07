@@ -8,13 +8,13 @@ import logo from './img/logo.jpg';
 function App() {
 
 
-  const [selectInput, setSelectInput] = useState();
+  const [selectInput, setSelectInput] = useState([{}]);
 
   const [cities, setCities] = useState(null);
 
 
 
-  // Lekérem a megyéket az API-tól amit a SelectInput state-hez adok hozzá, majd ezt map-elem és option-ként tér vissza
+  // Retrieve county names from API, then pass the value obtained to the state
 
   useEffect(() => {
     axios
@@ -27,7 +27,6 @@ function App() {
       .then(response => {
 
         setSelectInput(response.data.data);
-        console.log(response.data.data)
       })
       .catch((err) => console.log(err));
 
@@ -40,9 +39,10 @@ function App() {
 
   return (
     <>
+     
       <header>
-        <img className="logo" src={logo} />
-      </header>
+        <img className="logo" src={logo} alt="logo" />              
+      </header>                                              {/*  It could even be a separate comopnens, but there are few elements in it. */}
       <div className="triangle-container"></div>
       <Form
         selectInput={selectInput}

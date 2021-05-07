@@ -4,59 +4,52 @@ import { faTimes, faCheck, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { getCitiesApi, newCityApi, editCityApi, deleteCityApi } from './axiosHelper';
 
 /*
- Ez a file tartalmazza az egész program működését
- Blokkokba fogom csoportosítani a kód részleteket működésüknek megfelelően.
+This js contains the operation of the program
+I group the code details into blocks according to their roles.
 
+There are basically 5 blocks
+                                            -[1] Retrieve cities belonging to the county
+                                                requires:        
+                                                                -[1.1] a useState which will store the county's id.
+                                                                -[1.2] a handler that passes the id of the clicked county to the useState. 
+                                                                -[1.3] I call the function from axiosHelper.js which get the cities 
+                                                                    and I give it the required parameters.
 
- Alapvetően 5 főcsoportot fogok megkülönböztetni:
-                                                    -[1] A megyéhez tartozó városok lekérése
-                                                        szükséges hozzá: -[1.1] egy state, ami majd tárolja a megye id-ját.
-                                                                         -[1.2] egy kezelő, amely a kattintott megye id-ját átadja a state-nek. 
-                                                                         -[1.3] meghívom az axiosHelper.js nevű file-ból
-                                                                                a városok lekéréséhez szükséges függvényt és átadom neki a megfelelő paramétereket
+                                            -[2] Add a new city to the selected county
+                                                requires:
+                                                                -[2.1] a useState, which will store the value written to the input, which will be the name of the new city.
+                                                                -[2.2] an onChange handler that passes the data written to the input to the useState
+                                                                -[2.3] a submit handler
+                                                                -[2.4] I call the function from axiosHelper.js which create the new city from axiosHelper.js
+                                                                        and I pass it the required parameters.
+                                                                
 
-                                                    -[2] Új város hozzáadása a választott megyéhez
-                                                        szükséges hozzá: -[2.1] egy state, ami majd tárolja az inputba írt értéket, amely az új város neve lesz.
-                                                                         -[2.2] egy onChange kezelő ami az inputba írt adatot átadja a statenek
-                                                                         -[2.3] egy kezelő, ami a submitot kezeli le. 
-                                                                         -[2.4] meghívom az axiosHelper.js nevű file-ból
-                                                                          az új város létrehozásához szükséges függvényt és átadom neki a megfelelő paramétereket
-                                                                       
-
-                                                    -[3] Városnév kattintásra város id megszerzése és kinézet megváltoztatása
-                                                    szükséges hozzá:    - [3.1] egy state, ami majd tárolja a kattintott város id-ját
-                                                                        - [3.2] egy kezelő, amely lekezeli a kattintást
-                                                                        - [3.3] egy ciklus amely az összes li elem class nevét alaphelyzetbe teszi, így majd mindig csak
-                                                                                a kattintott városnév fog átváltozni inputtá
-                                                                         -[3.4] a kattintott városnév id-ját átadom a statenek
-                                                                         -[3.5] a kattintott város megkapja a class nevet ezzel átváltozik inputtá
-                                                                         -[3.6] ha megakarom szakítani a folyamatot szimplán csak visszaállítom a class neveket, és az input értékét is
-                                               
-                                                                         
-
-                                                    -[4] Városok szerkesztése
-                                                    szükséges hozzá:    - [4.1] egy state, ami majd tárolja a megváltoztatni kívánt város nevét amit beírtunk az input mezőbe
-                                                                         -[4.2] egy onChange kezelő ami az inputba írt adatot átadja a statenek
-                                                                         -[4.3] egy kezelő, ami az accept gombot kezeli le
-                                                                         -[4.4] megkeresem a kattintott város indexét hogy át bírjam adni. Így egyből lebírom frissíteni a városok nevét
-                                                                         -[4.5] meghívom az axiosHelper.js nevű file-ból a függvényt amivel a kattintot város nevét
-                                                                                megváltoztatom az API-ban, és átadom neki a szükséges paramétereket.
-                                                                         -[4.6] kattintás után elvesszük a class neveket
-
-                                                    -[5] Városok törlése
-                                                    szükséges hozzá:    - [5.1] Mivel már minden elő van készítve , csakegy onClick kezelőre van szükség
-                                                                         -[5.2] meghívom az axiosHelper.js nevű file-ból a függvényt amivel a kattintot várost
-                                                                                kitörlöm az API-ból, és átadom neki a szükséges paramétereket.
-                                                                     
+                                            -[3] Click on the listed city names and get their ID
+                                                requires:
+                                                                - [3.1] a useState which will store the clicked city's id.
+                                                                - [3.2] an onChange handler
+                                                                - [3.3] a function which will be responsible for resetting the elements style. I will use this several times
+                                                                - [3.4]  I pass the id of the clicked city to the useState
+                                                                - [3.5] the clicked city gets the class name, which turns it into input
+                                                                
+                                        
                                                                     
-                                                                        
-                                                                        
 
+                                            -[4] Edit cities
+                                                requires:
+                                                                - [4.1] a useState which will store the value of input field which will be the new name of the city
+                                                                - [4.2] an onChange handler which passes the value from the input field to useState 
+                                                                - [4.3] an onCclick handler
+                                                                - [4.4] Search index of the selected city to be able to pass as function parameter. So I can immediately update the names of the cities
+                                                                - [4.5] I call the function from axiosHelper.js which changes the name of the selected city in the API
+                                                                    and I give it the required parameters.
+                                                                
 
-
-
-
-
+                                            -[5] Delete cities
+                                                requires:
+                                                                - [5.1] an onClick handler
+                                                                - [5.2] I call the function from axiosHelper.js which delete the selected city in the API
+                                                                        and I give it the required parameters.                                                                                                                                                                                                                                                                            
 */
 
 const Form = ({ selectInput, cities, setCities, }) => {
@@ -66,7 +59,7 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
 
     const [countyId, setCountyId] = useState();     //[1.1]
-    let count;
+
 
     const [newCityinput, setNewCityInput] = useState(); //[2.1]
 
@@ -74,13 +67,21 @@ const Form = ({ selectInput, cities, setCities, }) => {
     const [cityId, setCityId] = useState(); //[3.1]
 
 
-    const [changeCityInputValue, setChangeCityInputValue] = useState();  //[4.1]
+    const [changeCityInputValue, setChangeCityInputValue] = useState('');  //[4.1]
 
 
-    const li = document.querySelectorAll('li');
- 
 
 
+    ///////////////////////// Reusable function /////////////////////////         [3.3]
+
+    function closeCity() {
+        const li = document.querySelectorAll('li');
+        for (let i = 0; i < li.length; i++) {
+            li[i].className = ""
+            li[i].nextElementSibling.className = "selected-wrapper hide"
+
+        };
+    }
 
     ///////////////////////// Handlers /////////////////////////
 
@@ -89,15 +90,10 @@ const Form = ({ selectInput, cities, setCities, }) => {
     const selectValueHandler = (e) => {         //[1.2]
 
 
-        count = selectInput.filter(f => f.name === e.target.value);
+        const count = selectInput.filter(f => f.name === e.target.value);
         setCountyId(count[0].id);
         getCitiesApi(count[0].id, setCities);  //[1.3]
-        const li = document.querySelectorAll('li');
-        for (let i = 0; i < li.length; i++) {
-            li[i].className = ""
-            li[i].nextElementSibling.className = "selected-wrapper hide"
-
-        };
+        closeCity()   // [3.3]
     };
 
 
@@ -107,10 +103,10 @@ const Form = ({ selectInput, cities, setCities, }) => {
     };
 
     const submitNewCityHandler = (e) => {      //[2.3]
-        e.preventDefault();                    // megakadájozza az oldal újratöltését
+        e.preventDefault();                    // prevents the page from reloading
         newCityApi(newCityinput, countyId, setCities, cities);           //[2.4]
 
-        setNewCityInput('');                   // kiüríti az inputot
+        setNewCityInput('');                   // clears the input
     };
 
 
@@ -118,14 +114,7 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
     const clickedCityHandler = (e) => {            //[3.1]
 
-        const li = document.querySelectorAll('li');
-        for (let i = 0; i < li.length; i++) {
-            li[i].className = ""
-            li[i].nextElementSibling.className = "selected-wrapper hide"
-        }
-
-
-
+        closeCity()   // [3.3]
 
         setChangeCityInputValue(cities.filter(f => f.name === e.target.innerText)[0].name);
 
@@ -134,15 +123,6 @@ const Form = ({ selectInput, cities, setCities, }) => {
         e.target.className = "hide";                            //[3.5]
 
     }
-
-    const closeButton = () => {                     //[3.6]
-        for (let i = 0; i < li.length; i++) {
-            li[i].className = ""
-            li[i].nextElementSibling.className = "selected-wrapper hide"
-            setChangeCityInputValue(li[i].innerText);
-        };
-
-    };
 
 
 
@@ -153,28 +133,18 @@ const Form = ({ selectInput, cities, setCities, }) => {
     const acceptButton = () => {        //[4.3]
 
         const index = cities.findIndex(i => i.id === cityId); // [4.4]
-
         editCityApi(cityId, changeCityInputValue, setCities, cities, index);    //[4.5]
+        closeCity()                           //[3.3]
 
-        for (let i = 0; i < li.length; i++) {
-            li[i].className = "";                                   //[4.6]
-            li[i].nextSibling.className = "selected-wrapper hide";
 
-        };
 
     };
 
 
     const removeButton = () => {            //[5.1]
-        deleteCityApi(cityId,countyId,setCities);              //[5.2]
-        
-        for (let i = 0; i < li.length; i++) {
-            li[i].className = "";
-            li[i].nextSibling.className = "selected-wrapper hide";
-        };
-       
+        deleteCityApi(cityId, countyId, setCities);              //[5.2]
+        closeCity()   //[3.3]
     };
-
 
 
     ///////////////////////// Render /////////////////////////
@@ -198,8 +168,8 @@ const Form = ({ selectInput, cities, setCities, }) => {
                     <div className="new-city-container">
                         <h2>Új város</h2>
                         <form onSubmit={submitNewCityHandler}>
-                            <input value={newCityinput} onChange={onChangeNewCityHandler} type="text"></input>
-                            <button type="submit">Felveszem</button>
+                            <input placeholder="Település neve" value={newCityinput} onChange={onChangeNewCityHandler} type="text"></input>
+                            <button className="new-city__button" type="submit">Felveszem</button>
                         </form>
                     </div>
                     <div className="rectangle green"></div>
@@ -217,9 +187,9 @@ const Form = ({ selectInput, cities, setCities, }) => {
 
                                         <div className="selected-wrapper hide">
                                             <input onChange={onChangeCityNameHandler} value={changeCityInputValue} className="selected-item" ></input>
-                                            <button onClick={acceptButton} className="button modify"><FontAwesomeIcon icon={faCheck} /></button>
-                                            <button onClick={closeButton} className="button cancel"><FontAwesomeIcon icon={faTimes} /></button>
                                             <button onClick={removeButton} className="button delete"><FontAwesomeIcon icon={faTrashAlt} /></button>
+                                            <button onClick={acceptButton} className="button modify"><FontAwesomeIcon icon={faCheck} /></button>
+                                            <button onClick={closeCity} className="button cancel"><FontAwesomeIcon icon={faTimes} /></button>
                                         </div>
                                     </>
                                     )}

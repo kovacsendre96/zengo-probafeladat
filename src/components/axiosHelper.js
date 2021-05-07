@@ -8,8 +8,8 @@ They are separated from the other codes for easier transparency.
 
 Roles of functions:
                         -[1] Getting cities from API
-                        -[2] Creating a new city +error alert
-                        -[3] Edit city name  +error alert
+                        -[2] Creating a new city + error alert
+                        -[3] Edit city name  + error alert
                         -[4] Delete city
 
 
@@ -32,7 +32,7 @@ export function getCitiesApi(stateId, setState) {
         .then(response => {
 
 
-            setState(response.data.data);
+            setState(response.data.data)
 
 
         })
@@ -70,7 +70,7 @@ export function newCityApi(newCityName, stateId, setState, cities) {
 
 
 
-            if (response.data.errorMessage) {               
+            if (response.data.errorMessage) {
                 alert(response.data.errorMessage.name[0])
             }
 
@@ -130,7 +130,7 @@ export function editCityApi(cityId, cityModify, setState, cities, index) {
 method:delete
 params: -city_id : city id 
 */
-export function deleteCityApi(cityId,stateId,setState) {
+export function deleteCityApi(cityId, stateId, setState) {
     axios.delete('http://probafeladat-api.zengo.eu/api/city',
         {
             data:

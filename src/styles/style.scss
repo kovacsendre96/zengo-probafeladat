@@ -1,17 +1,54 @@
+///////////////////////// Base settings /////////////////////////
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body {
-    background-color: #fff0e1;
-    position: relative;
+:root {
+    --background-color: #fff0e1;
+    --blue-color: #b1c9ff;
+    --blue-text-color: #4a82ff;
+    --green-color: #80ba27;
+    --light-green-color: #cae99a;
+    --red-color: #e85128;
+    --grey-color: #9b9b9b;
+    --white-color: #fff;
 }
+
+body {
+    background-color: var(--background-color);
+}
+
+select,
+input,
+button {
+    outline: none;
+}
+
+h2,
+h6,
+.new-city__button {
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 13px;
+}
+
+button,
+.cities__content-list,
+.selected-item {
+    font-size: 14px;
+}
+
+///////////////////////// Settings /////////////////////////
+
 header {
     width: 100%;
     height: 60px;
-    background: #ffffff;
+    background: var(--white-color);
     position: relative;
     .logo {
         position: absolute;
@@ -22,7 +59,7 @@ header {
 .triangle-container {
     width: 322px;
     height: 175.89px;
-    background: url(../img/pattern.jpg);
+    background: url('../img/pattern.jpg');
     position: absolute;
     top: 119px;
     left: 138px;
@@ -41,7 +78,7 @@ header {
     position: absolute;
     left: 638px;
     top: 295.29px;
-    background: url(../img/illustration.jpg);
+    background: url( ../img/illustration.jpg);
 }
 .illustration-wrapper.hide {
     display: none;
@@ -50,7 +87,7 @@ header {
 .form-container {
     width: 322px;
     height: 130px;
-    background-color: #b1c9ff;
+    background-color: var(--blue-color);
     position: absolute;
     top: 295px;
     left: 138px;
@@ -61,13 +98,13 @@ header {
         position: absolute;
         top: 56px;
         left: 29px;
+        padding-left: 12px;
     }
 
     h2 {
         position: absolute;
         margin-top: 38px;
         left: 29px;
-        font-size: 13px;
         text-transform: uppercase;
     }
 }
@@ -80,12 +117,12 @@ header {
     z-index: 1;
 }
 .rectangle.blue {
-    background: #b1c9ff;
+    background: var(--blue-color);
     top: 410.86px;
     left: 284.86px;
 }
 .rectangle.green {
-    background: #cae99a;
+    background: var(--light-green-color);
     top: 495.86px;
     left: 445.86px;
 }
@@ -96,13 +133,12 @@ header {
     position: absolute;
     top: 425px;
     left: 138px;
-    background-color: #cae99a;
+    background-color: var(--light-green-color);
 
     h2 {
         position: absolute;
         top: 28px;
         left: 29px;
-        font-size: 13px;
         text-transform: uppercase;
     }
     input {
@@ -111,18 +147,24 @@ header {
         position: absolute;
         top: 50px;
         left: 29px;
+        padding-left: 12px;
+        &::placeholder {
+            color: var(--grey-color);
+            font-style: italic;
+        }
     }
     button {
         width: 263px;
         height: 34px;
-        background-color: #80ba27;
+        background-color: var(--green-color);
         position: absolute;
         top: 99px;
         left: 29px;
-        color: white;
+        color: var(--white-color);
         text-transform: uppercase;
         border: none;
         border-radius: 5px;
+        cursor: pointer;
     }
 }
 
@@ -130,12 +172,13 @@ header {
     width: 652px;
     height: 771px;
     position: absolute;
-    background-color: white;
+    background-color: var(--white-color);
     left: 460px;
     top: 119px;
 
     .cities__top {
-        background-color: #dbe6ff;
+        /* background-color: rgba(var(--blue-color) 0.45); */
+        background-color: #dce7ff;
         height: 70px;
         width: 100%;
         position: absolute;
@@ -147,15 +190,15 @@ header {
             font-size: 18px;
             position: absolute;
             top: 31px;
+            color: var(--blue-text-color);
         }
         .cities__top-title {
             left: 110px;
             text-transform: uppercase;
-            color: #4a82ff;
         }
         .cities__top-county {
             left: 196px;
-            color: #6897ff;
+            font-weight: 400;
         }
     }
 
@@ -166,7 +209,7 @@ header {
             left: 88px;
             font-size: 18px;
             text-transform: uppercase;
-            color: #80ba27;
+            color: var(--green-color);
         }
         .cities__content-list {
             position: absolute;
@@ -174,9 +217,9 @@ header {
             left: 195px;
             list-style: none;
             line-height: 33px;
-            font-size: 14px;
             font-weight: 500;
-            overflow-y: scroll;
+            overflow-x: scroll;
+            padding-left: 13px;
             height: 80%;
             &::-webkit-scrollbar {
                 visibility: visible;
@@ -189,6 +232,7 @@ header {
             display: none;
         }
         .selected-wrapper {
+            margin-left: -13px;
             .selected-item {
                 width: 275px;
                 height: 34px;
@@ -202,21 +246,21 @@ header {
                 margin-right: 7px;
                 border-radius: 5px;
                 border: 1px solid;
-                color: #ffffff;
+                color: var(--white-color);
                 cursor: pointer;
             }
             .button.delete {
-                background-color: #e85128;
-                border-color: #e85128;
+                background-color: var(--red-color);
+                border-color: var(--red-color);
                 margin-left: 12px;
             }
             .button.modify {
-                background-color: #80ba27;
-                border-color: #80ba27;
+                background-color: var(--green-color);
+                border-color: var(--green-color);
             }
             .button.cancel {
-                background-color: #9b9b9b;
-                border-color: #9b9b9b;
+                background-color: var(--grey-color);
+                border-color: var(--grey-color);
             }
         }
         .selected-wrapper.hide {
